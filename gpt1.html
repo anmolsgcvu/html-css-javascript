@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <style>.container {
+        max-width: 400px;
+        margin: 0 auto;
+        text-align: center;
+      }
+      
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 50px;
+        margin-bottom: 20px;
+      }
+      
+      form {
+        display: inline-block;
+        text-align: left;
+      }
+      
+      label {
+        display: block;
+        margin-top: 10px;
+      }
+      
+      input[type="text"], input[type="password"] {
+        padding: 10px;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+      }
+      
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login</h1>
+      <form id="login-form">
+        <label>
+          <input type="radio" name="user-type" value="user" checked>
+          User
+        </label>
+        <label>
+          
+        <br><br>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <button type="submit">Login</button>
+      </form>
+      <hr>
+      <h1>Create Account</h1>
+      <form id="signup-form">
+        <label for="new-username">Username</label>
+        <input type="text" id="new-username" name="new-username" required>
+        <label for="new-password">Password</label>
+        <input type="password" id="new-password" name="new-password" required>
+        <button type="submit" >Create Account</button>
+      </form>
+    </div>
+    <form action="gpt2.html" >
+        <button type="submit">admin</button>
+    </form>
+    <script>// Get forms
+        const loginForm = document.getElementById("login-form");
+        const signupForm = document.getElementById("signup-form");
+        
+        // Function to validate user credentials
+        function validateLogin(username, password, userType) {
+          // Get users or admins from localStorage, or create empty object if it doesn't exist
+          const usersOrAdmins = JSON.parse(localStorage.getItem(userType)) || {};
+          
+          if (username in usersOrAdmins && usersOrAdmins[username] === password) {
+            return true;
+          } else {
+            return false;
+          }
+        }
+        
+        // Event listener for login form submission
+        loginForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const username = event.target.elements.username.value;
+          const password = event.target.elements.password.value;
+          const userType = document.querySelector('input[name="user-type"]:checked').value;
+          if (validateLogin(username, password, userType)) {
+            alert("Login successful!");
+            // Redirect to appropriate page based on user type (admin vs user)
+            if (userType === "admin") {
+              window.location.href = "pr.html";
+            } else {
+              window.location.href = "login.html";
+            }
+          } else {
+            alert("Invalid username or password. Please try again.");
+          }
+        });
+        
+        // Function to create a new account
+        function createAccount(username, password, userType) {
+          // Get users or admins from localStorage, or create empty object if it doesn't exist
+          const usersOrAdmins = JSON.parse(localStorage.getItem(userType)) || {};
+          
+          // Check if username already exists
+          if (username in usersOrAdmins) {
+            alert("Username already exists. Please choose a different one.");
+            return false;
+          } else {
+            // Add new user or admin to localStorage
+            usersOrAdmins[username] = password;
+            localStorage.setItem(userType, JSON.stringify(usersOrAdmins));
+            alert("Account created successfully!");
+            return true;
+          }
+        }
+        
+        // Event listener for signup form submission
+        signupForm.addEventListener("submit", (event) => {
+          event.preventDefault();
+          const username = event.target.elements["new-username"].value;
+          const password = event.target.elements["new-password"].value;
+          const userType = "user"; // New accounts are always regular users
+          if (createAccount(username, password, userType)) {
+            // Clear form inputs
+            event.target.elements["new-username"].value = "";
+            event.target.elements["new-password"].value = "";
+          }
+        });
+        </script>
+  </body>
+</html>

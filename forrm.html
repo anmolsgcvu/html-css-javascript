@@ -1,0 +1,33 @@
+<!DOCTYPEhtml>
+
+<html lang="en">
+
+<head><meta charset="utf-8">
+
+<title>Document</title>
+
+</head>
+
+<body bgcolor="download">
+    <button type="button" onclick="greet()">greet</button>
+    console.log(g1());
+<script>
+    const g1 = greet();
+    console.log(g1); // returns the function definition
+    console.log(g1());
+function greet() {
+    // variable defined outside the inner function
+    let name = 'John';
+    // inner function
+    function displayName() {
+    // accessing name variable
+    alert('Hi' + ' ' + name);
+    return console.log('Hi' + ' ' + name);
+    
+    }
+    return displayName;
+   }
+   
+   
+</script>
+</body></html>

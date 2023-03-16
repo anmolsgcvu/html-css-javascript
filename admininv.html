@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inventory Management System</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+    <style>h1 {
+        text-align: center;
+    }
+    
+    .loginForm {
+        width: 50%;
+        margin: 50px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+    }
+    
+    .loginForm h2 {
+        margin-top: 0;
+    }
+    
+    .loginForm form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .loginForm label {
+        margin-top: 10px;
+    }
+    
+    .loginForm input {
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+    
+    .loginForm button {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+    
+    .loginForm button:hover {
+        background-color: #3e8e41;
+    }
+    
+    table {
+        margin: 50px auto;
+        border-collapse: collapse;
+    }
+    
+    table th {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+    }
+    
+    table td {
+        padding: 10px;
+        border: 1px solid #ccc;
+        text-align: center;
+    }
+    
+    .addBtn, .removeBtn {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+    
+    .addBtn:hover, .removeBtn:hover {
+        background-color: #3e8e41;
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    #adminControls {
+        width: 50%;
+        margin: 50px auto;
+        text-align: center;
+    }
+    
+    #adminControls button {
+        margin-right: 10px;
+    }
+    
+    
+</style>
+</head>
+<body>
+	<h1>Inventory Management System</h1>
+
+	<div class="loginForm">
+		<h2>Admin Login</h2>
+		<form>
+			<label for="adminUsername">Username:</label>
+			<input type="text" id="adminUsername" name="adminUsername">
+			<label for="adminPassword">Password:</label>
+			<input type="password" id="adminPassword" name="adminPassword">
+			<button id="adminLoginBtn">Login</button>
+		</form>
+	</div>
+
+	<div class="loginForm">
+		<h2>User Login</h2>
+		<form>
+			<label for="userUsername">Username:</label>
+			<input type="text" id="userUsername" name="userUsername">
+			<label for="userPassword">Password:</label>
+			<input type="password" id="userPassword" name="userPassword">
+			<button id="userLoginBtn">Login</button>
+		</form>
+	</div>
+
+	<table id="inventoryTable">
+		<tr>
+			<th>Product Name</th>
+			<th>Quantity</th>
+			<th>Action</th>
+		</tr>
+		<tr>
+			<td>Product 1</td>
+			<td>10</td>
+			<td><button class="addBtn">Add</button> <button class="removeBtn">Remove</button></td>
+		</tr>
+		<tr>
+			<td>Product 2</td>
+			<td>5</td>
+			<td><button class="addBtn">Add</button> <button class="removeBtn">Remove</button></td>
+		</tr>
+		<tr>
+			<td>Product 3</td>
+			<td>15</td>
+			<td><button class="addBtn">Add</button> <button class="removeBtn">Remove</button></td>
+		</tr>
+	</table>
+
+	<div id="adminControls" class="hidden">
+		<button id="addProductBtn">Add Product</button>
+		<button id="removeProductBtn">Remove Product</button>
+	</div>
+
+	<script >// Get elements from the DOM
+        const adminLoginForm = document.querySelector('#adminLoginForm');
+        const adminUsernameInput = document.querySelector('#adminUsername');
+        const adminPasswordInput = document.querySelector('#adminPassword');
+        const adminLoginBtn = document.querySelector('#adminLoginBtn');
+        const userLoginForm = document.querySelector('#userLoginForm');
+        const userUsernameInput = document.querySelector('#userUsername');
+        const userPasswordInput = document.querySelector('#userPassword');
+        const userLoginBtn = document.querySelector('#userLoginBtn');
+        const inventoryTable = document.querySelector('#inventoryTable');
+        const addProductBtn = document.querySelector('#addProductBtn');
+        const removeProductBtn = document.querySelector('#removeProductBtn');
+        const adminControls = document.querySelector('#adminControls');
+        
+        // Create an array of products
+        let products = [
+            { name: 'Product 1', quantity: 10 },
+            { name: 'Product 2', quantity: 5 },
+            { name: 'Product 3', quantity: 15 }
+        ];
+        
+        // Create a function to display the products in the table
+        function displayProducts() {
+            // Clear the table
+            inventoryTable.innerHTML = '';
+            // Add the table headers
+            inventoryTable.innerHTML += `
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            `;
+            // Add each product to the table
+            products.forEach((product, index) => {
+                inventoryTable.innerHTML += `
+                    <tr>
+                        <td>${product.name}</td>
+                        <td>${product.quantity}</td>
+                        <td><button class="addBtn" data-index="${index}">Add</button> <button class="removeBtn" data-index="${index}">Remove</button></td>
+                    </tr>
+                `;
+            });
+        }
+        
+        // Call the displayProducts function to display the initial products
+        displayProducts();
+        
+        // Create a function to add a product
+        function addProduct(name, quantity) {
+            products.push({ name, quantity });
+            displayProducts();
+        }
+        
+        // Create a function to remove a product
+        function removeProduct(index) {
+            products.splice(index, 1);
+            displayProducts();
+        }
+        
+        // Add a click event listener to the add product button
+        addProductBtn.addEventListener('click', () => {
+            // Prompt the user for the product name and quantity
+            const name = prompt('Enter the product name:');
+            const quantity = parseInt(prompt('Enter the quantity:'));
+            // Add the product
+            addProduct(name, quantity);
+        });
+        
+        // Add a click event listener to the remove product button
+        removeProductBtn.addEventListener('click', () => {
+            // Prompt the user for the product index
+            const index = parseInt(prompt('Enter the product index:'));
+            // Remove the product
+            removeProduct(index);
+        });
+        
+        </script>
+</body>
+</html>

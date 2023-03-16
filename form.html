@@ -1,0 +1,74 @@
+ <!DOCTYPEhtml>
+
+<html lang="en">
+
+<head>
+
+<title>Document</title>
+
+</head>
+
+<body bgcolor="download">
+    <img src="25-fb783cb9fc" alt="Girl in a jacket" width="500" height="600">
+
+<form>
+
+Principle amount: < input type="number" id="principle"><br><br>
+
+Rate of interest:  < input type="number" id="rate" max="100"><br><br>
+
+Time (in years): < input type="number" id="time" max="15"><br><br>
+
+<button type="button" onclick="calculateInterest()">Calculate Interest</button>
+
+</form>
+
+<script>
+
+function calculateInterest()
+
+{
+
+let principle = document.getElementById("principle").value;
+
+let rate = document.getElementById("rate").value;
+
+let time = document.getElementById("time").value;
+
+if (isNaN(principle) || isNaN(rate) || isNaN(time)) {
+
+document.getElementById("result").innerHTML = "Invalid input. Amount, rate of interest and time must be numeric.";
+
+return;
+
+}
+
+if (rate > 100) {
+
+document.getElementById("result").innerHTML = "Rate of interest cannot be more than 100.";
+
+return;
+
+}
+
+if (time > 15) {
+
+document.getElementById("result").innerHTML = "Time cannot be greater than 15 years.";
+
+return;
+
+}
+
+let interest = principle * rate * time / 100;
+
+document.getElementById("result").innerHTML = "Interest: $" + interest;
+
+}
+
+</script>
+
+<p id="result"></p>
+
+</body>
+
+</html>

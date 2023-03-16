@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+<body bgcolor="C:\Users\HP\Downloads">
+
+<h2>HTML Forms</h2>
+
+<form>
+
+<label for="start">Start:</label><br>
+
+<input type="radio" id="start" name="start" value="asdfty"><br>
+
+<label for="end">End:</label><br>
+
+<input type="number" id="end" name="end"><br><br>
+
+<button onclick="myFunction()">Click me</button>
+
+</form>
+
+<script>
+
+function myFunction() {
+
+var start = document.getElementById("start").value;
+
+var end = document.getElementById("end").value;
+alert(start);
+for (let i=start; i<=end; i++) {
+
+if(i % 2 === 0) {
+
+alert(i);
+
+}
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

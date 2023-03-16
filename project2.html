@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {font-family: Arial;}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+</style>
+</head>
+<body>
+
+<h2>Tabs</h2>
+<p>Click on the buttons inside the tabbed menu:</p>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+</div>
+
+<div id="London" class="tabcontent">
+    <p>Please select your favorite Web language:</p>
+    <form >
+        
+      
+      <input type="radio" id="gold" name="gold" value="gold">
+      <label for="gold">gold</label><br>
+      <input type="radio" id="silver" name="silver" value="silver">
+      <label for="silver">silver</label><br>
+      <input type="radio" id="dimand" name="dimand" value="dimand">
+      <label for="dimand">dimand</label>
+        <input type="radio" id="ring" name="ring" value="ring">
+        <label for="ring">ring</label><br>
+        <input type="radio" id="bali" name="bali" value="bali">
+        <label for="bali">bali</label><br>  
+        <input type="radio" id="chain" name="chain" value="chain">
+        <label for="chain">chain</label><br>
+        <input type="radio" id="top" name="top" value="top">
+      <label for="top">top</label><br>
+      <input type="radio" id="nose" name="nose" value="nose">
+      <label for="nose">nose</label>
+        <input type="radio" id="set" name="set" value="set">
+        <label for="set">set</label><br>
+        <input type="radio" id="payal" name="payal" value="payal">
+        <label for="payal">payal</label><br>  
+        <input type="radio" id="braslate_siler" name="braslate_siler" value="braslate_siler">
+        <label for="braslate_siler">braslate_siler</label><br>
+        <input type="radio" id="braslate_gold" name="braslate_gold" value="braslate_gold">
+      <label for="braslate_gold">braslate_gold</label><br>
+      <input type="radio" id="chain_silver" name="chain_silver" value="chain_silver">
+      <label for="chain_silver">chain_silver</label>
+        <input type="radio" id="kity_set" name="kity_set" value="kity_set">
+        <label for="kity_set">kity_set</label><br>
+        <br>
+        <label for="wight">wight</label><input type="text" id="wight" name="wight"><br>
+        <button onclick="buy()">Click me</button>
+      </form>
+      
+</div>
+
+<div id="Paris" class="tabcontent">
+    <p>Please select your favorite Web language:</p>
+    <form >
+        
+      
+      <input type="radio" id="gold" name="gold" value="gold">
+      <label for="gold">gold</label><br>
+      <input type="radio" id="silver" name="silver" value="silver">
+      <label for="silver">silver</label><br>
+      <input type="radio" id="dimand" name="dimand" value="dimand">
+      <label for="dimand">dimand</label>
+        <input type="radio" id="ring" name="ring" value="ring">
+        <label for="ring">ring</label><br>
+        <input type="radio" id="bali" name="bali" value="bali">
+        <label for="bali">bali</label><br>  
+        <input type="radio" id="chain" name="chain" value="chain">
+        <label for="chain">chain</label><br>
+        <input type="radio" id="top" name="top" value="top">
+      <label for="top">top</label><br>
+      <input type="radio" id="nose" name="nose" value="nose">
+      <label for="nose">nose</label>
+        <input type="radio" id="set" name="set" value="set">
+        <label for="set">set</label><br>
+        <input type="radio" id="payal" name="payal" value="payal">
+        <label for="payal">payal</label><br>  
+        <input type="radio" id="braslate_siler" name="braslate_siler" value="braslate_siler">
+        <label for="braslate_siler">braslate_siler</label><br>
+        <input type="radio" id="braslate_gold" name="braslate_gold" value="braslate_gold">
+      <label for="braslate_gold">braslate_gold</label><br>
+      <input type="radio" id="chain_silver" name="chain_silver" value="chain_silver">
+      <label for="chain_silver">chain_silver</label>
+        <input type="radio" id="kity_set" name="kity_set" value="kity_set">
+        <label for="kity_set">kity_set</label><br>
+        <br>
+        <label for="wight">wight</label><input type="text" id="wight" name="wight"><br>
+        <button onclick="buy()">Click me</button>
+      </form>
+       
+</div>
+
+<div id="Tokyo" class="tabcontent">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+            
+    <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+}
+var gold=0;
+var silver=0;
+var dimand=0;
+var ring=0;
+var bali=0;
+var chain=0;
+var top=0;
+var noise=0;
+var set=0;
+var payal=0;
+var braslate_silver=0;
+var braslate_gold=0;
+var chain_silver=0;
+var kity_set=0;
+function buy(){
+    var start = document.getElementById("radio").value;
+    var end = document.getElementById("wight").value;
+    console.log(start);
+
+}
+var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
+var yValues = [5, 4, 44, 24, 15];
+var barColors = ["red", "green","blue","orange","brown"];
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "World Wine Production 2018"
+    }
+  }
+});
+
+</script>
+   
+</body>
+</html> 
